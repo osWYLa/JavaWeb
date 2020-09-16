@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="UTF-8">
+    <title>表单标签</title>
+    <!--
+    form 标签
+    表单：用于采集用户数据的（和服务器交互）
+    -->
+
+</head>
+<body>
+    <!--
+    form 用于定义表单，可以定义一个范围，代表采集用户数据的范围(包裹两个提交两个)
+        属性：
+        action：指定提交数据的URL
+        method: 指定提交方式(共7中)
+            get:
+                1、请求参数会在地址栏中显示。（会封装到请求行中）
+                2、请求参数长度有限制
+                3、不太安全
+            post
+                1、请求参数不会在地址栏中显示，会封装在请求体中（Http协议中学习）
+                2、请求参数没有限制
+                3、较为安全
+
+
+        表单中的数据（表单项）要想被提交，必须指定name属性
+
+    -->
+
+
+    <!--
+    表单项标签:
+
+        label 用于指定输入项的文字描述信息；label的for属性值一般会和input的id属性值对应。如果都对应了，点击label区域，会让input输入框获取焦点（先给 input 里面一个id）
+        input : 可以接受用户输入。
+            type属性：默认text 文本输入框
+                            placeholder 用于指定输入框的提示信息，当输入框的内容发生变化时，会自动清空提示信息
+                     password 密码输入框
+                     radio；单选框 要想实现单选，name必须相同；一般会给每个单选框提供value属性值，用来区分是哪个单选框
+                     checkbox：复选框
+                     file : 文件选择框
+                     hidden : 隐藏域
+                     按钮：
+                        summit:提交按钮，可以提交表单
+                        button: 按钮
+                        img:点击图片提交
+
+
+
+        select: 下拉列表
+        textarea:文本域
+    -->
+
+
+    <!--为什么post请求会出现404错误-->
+
+    <form action="#" method="get">
+        用户名：<input name="username"><br/>
+        密码：<input name="password"><br/>
+        <input type="submit" value="登录">
+    </form>
+
+
+    <br/><hr/>
+
+    <!--input label-->
+    <form action="#" method="get">
+
+
+        <!--
+        text 的默认值设置：value属性（正常不使用），一般使用placeholder(用于密码还可以查看密码的值？？？？为什么只有第一次填写的时候有（把原先写的密码全部删除也可以正常使用）)
+        -->
+        <!--
+        <label for="username"> 表示 用户名 是用来描述后面的信息的
+        -->
+        <label for="username">用户名：</label><input type="text" name="username" placeholder="请输入用户名如：张三" id="username"><br/>
+
+        密码：<input type="password" name="password" placeholder="请输入密码如：1234"><br/>    <!-- type = "password" 设置密码显示为黑点，提高安全性-->
+
+        <!--单选框-->
+        性别：<input type="radio" name="gender" value="man" checked="checked"> 男
+        <input type="radio" name="gender" value="female"> 女<br/>
+
+        <!--复选框-->
+        爱好：<input type="checkbox" name="hobby" value="shopping"> 逛街
+        <input type="checkbox" name="hobby" value="game" checked> 游戏
+        <input type="checkbox" name="hobby" value="reading"> 读书
+
+        <!--设置默认选中 checked = "checked" 或者直接写checked都行-->
+        <br/>
+
+        图片：<input type="file" name="picture"><br/>
+
+        隐藏域：<input type="hidden" name="h" value="aaa"><br>
+
+        <!--h5新增-->
+        颜色：<input type="color" name="color"><br>
+        生日（日期）：<input type="date" name="birthday"><br>
+        生日（日期）：<input type="datetime-local" name="birthday"><br>
+            <!--会做正则校验--><!--为什么空的不报错？？？-->
+        邮箱：<input type="email" name="email"><br>
+        年龄:<input type="number" name="age"><br><!--只能输入数字-->
+
+        <!--select 下拉列表-->
+        省份：<select name="province">
+        <!--定义列表项 option--> <!--value 是提交的值--><!--selected 默认选中-->
+                <option>--请选择--</option>
+                <option value="1">北京</option>
+                <option value="2">上海</option>
+                <option value="3">南京</option>
+                <option value="4">深圳</option>
+            </select>
+
+        <br/>
+
+
+        <!--文本域-->
+        自我描述：<textarea cols="20" rows="5" name="describe"> </textarea>
+
+
+        <input type="button" value="这就是一个简单的按钮">
+        <br/>
+
+        <!--设置图片提交按钮-->
+        <input type="image" src="asserts/wallhaven-49rqw1.jpg">
+
+        <input type="submit" value="登录">
+    </form>
+
+
+
+
+
+
+
+</body>
+</html>
