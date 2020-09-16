@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格标签</title>
+</head>
+<body>
+<!--
+table:定义表格
+tr:定义行
+td:定义单元格
+th:定义表头单元格
+-->
+
+<table border="1"width="50%" cellpadding="0"cellspacing="0" bgcolor="aqua" align="center">
+    <tr>
+        <!--<td>编号</td>
+        <td>姓名</td>
+        <td>成绩</td>-->
+        <!--表头单元格默认居中显示-->
+        <th>编号</th>
+        <th>姓名</th>
+        <th>成绩</th>
+
+    </tr>
+
+    <tr>
+        <td>1</td>
+        <td>yuye1</td>
+        <td>100</td>
+    </tr>
+
+    <tr>
+        <td>2</td>
+        <td>yuye2</td>
+        <td>90</td>
+    </tr>
+
+</table>
+<hr/>
+
+
+<table border="1"width="50%" cellpadding="0"cellspacing="0" bgcolor="aqua" align="center">
+    <!--表格标题 caption-->
+    <!--
+    thead:表示表格头的部分
+    tbody:表示表体的部分
+    tfoot:表示表脚的部分
+
+    这三个都没有什么实际的样式，之后配合CSS使用。类似与语义化标签，但不是h5新出的语义化标签，之前就已经存在
+    这三个会有前后顺序，会按照顺序展示
+
+    -->
+    <caption>学生信息表</caption>
+    <thead>
+    <tr>
+        <!--<td>编号</td>
+        <td>姓名</td>
+        <td>成绩</td>-->
+        <!--表头单元格默认居中显示-->
+        <th>编号</th>
+        <th>姓名</th>
+        <th>成绩</th>
+
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr bgcolor="blue" align="center">
+        <td>1</td>
+        <td>yuye1</td>
+        <td>100</td>
+    </tr>
+
+
+
+    <tr>
+        <td>2</td>
+        <td>yuye2</td>
+        <td>90</td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+<hr/>
+
+
+<!--合并行列 （内容不做要求，只是示意）-->
+<table border="1"width="50%" cellpadding="0"cellspacing="0" bgcolor="aqua" align="center">
+
+    <!--第一行三个单元格，第二行两个单元格，第三行两个单元格-->
+
+    <tr>
+        <!--<td>编号</td>
+        <td>姓名</td>
+        <td>成绩</td>-->
+        <!--表头单元格默认居中显示-->
+
+<!--第一个单元格占两行-->
+        <th rowspan="2">编号</th>
+        <th>姓名</th>
+        <th>成绩</th>
+
+    </tr>
+
+    <tr>
+
+        <td>yuye1</td>
+        <td>100</td>
+    </tr>
+
+    <!--这个单元格占两列-->
+    <tr>
+        <td>2</td>
+        <td colspan="2">yuye2</td>
+
+    </tr>
+
+</table>
+<hr/>
+
+
+
+
+
+
+</body>
+</html>
