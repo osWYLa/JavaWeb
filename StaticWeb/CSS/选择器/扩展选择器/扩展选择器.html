@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩展选择器</title>
+
+    <style>
+        /*子选择器*/
+        div p{
+            color: red;
+        }
+        /*父选择器*/
+        div > p{
+            border: 1px solid;/*加边框*/
+        }
+        /*属性选择器*/
+        input[type="text"]{
+            border: 5px solid;
+        }
+        /*伪类选择器*/
+        a:link{
+            color: pink;
+        }
+        a:visited{
+            color: green;
+        }
+        a:active{
+            color: yellow;
+        }
+        a:hover{
+            color: red;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div>
+        <p>子选择器</p>
+    </div>
+    <p>扩展选择器</p>
+    <div>测试</div>
+
+    <input type="text">
+    <input type="password"><br/>
+
+    <a href="#">伪类选择器</a>
+
+</body>
+</html>

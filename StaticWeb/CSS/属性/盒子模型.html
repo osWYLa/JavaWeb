@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盒子模型</title>
+    <style>
+        div {
+            border: 1px solid red;
+
+            /*将三个div的宽度统一*/
+            width: 100px;
+
+        }
+
+        .div1 {
+            width: 100px;
+            height: 100px;
+            /*外边距 （相对概念）*/
+           /* margin-left: 50px;!*外边距 （相对概念）*!
+            !*margin: 50px;*!*/
+        }
+
+        .div2 {
+            /*n内边距*/
+            width: 200px;
+            height: 200px;
+            padding: 50px;/*默认情况下内边距会影响整个盒子的大小*/
+            /*需要加上下面这句话，使得宽高就是指定的width和height*/
+            box-sizing: border-box;
+
+        }
+
+        /*浮动*/
+        .div3{
+            float: left;
+        }
+        .div4{
+            float: left;
+        }
+        .div5{
+            float: left;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="div2">
+        <div class="div1"></div>
+    </div>
+    <div class="div3">aaaaa</div>
+    <div class="div4">bbbbb</div>
+    <div class="div5">ccccc</div>
+</body>
+</html>
