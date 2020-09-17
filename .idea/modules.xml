@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/StaticWeb/CSS/CSS.iml" filepath="$PROJECT_DIR$/StaticWeb/CSS/CSS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StaticWeb/HTML/HTML.iml" filepath="$PROJECT_DIR$/StaticWeb/HTML/HTML.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StaticWeb/JavaScript/JavaScript.iml" filepath="$PROJECT_DIR$/StaticWeb/JavaScript/JavaScript.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb.iml" filepath="$PROJECT_DIR$/JavaWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/StaticWeb/StaticWeb.iml" filepath="$PROJECT_DIR$/StaticWeb/StaticWeb.iml" />
     </modules>
