@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乘法表</title>
+
+    <!--CSS 选择器控制样式-->
+    <style>
+        td{
+            border: black 1px solid;
+        }
+    </style>
+
+    <script>
+        document.write("<table  align='center'>")
+        for (let i = 1; i <= 9 ; i++) {
+            document.write("<tr>")
+            for (let j = 1; j <= i ; j++) {
+                document.write("<td>")
+                document.write(j+" * "+i+" = "+(i*j)+"&nbsp;&nbsp;&nbsp;");
+                document.write("</td>")
+            }
+            /*
+            document.write("<br/>")*/
+            document.write("</tr>")
+        }
+        document.write("</table>")
+
+    </script>
+
+</head>
+<body>
+
+
+
+</body>
+</html>
