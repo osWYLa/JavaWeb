@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RegExp正则表达式对象</title>
+
+    <script>
+        /*第一种方式，需要注意转义字符的使用*/
+        var reg = new RegExp("^\\w{6,12}$");
+        /*第二种方式，需要注意，双杠里面的内容不能使用引号引起来，使用引号引起来就是字符串了*/
+        var reg2 = /^\w{6,12}$/;
+
+        var username = "zhangsan";
+        var flag = reg2.test(username);
+        var flag2 = reg.test(username);
+        alert(flag);
+        alert(flag2)
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
