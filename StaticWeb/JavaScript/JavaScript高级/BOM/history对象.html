@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history对象</title>
+</head>
+<body>
+    <input id="btn" type="button" value="参看当前页面的记录">
+    <a href="../案例/案例2-轮播图/autoSwitch.html">轮播图页面</a>
+    <input id="btn_forward" type="button" value="前进">
+    <input id="btn_backward" type="button" value="后退">
+    <script>
+        let btn = window.document.getElementById("btn");
+        btn.onclick = function () {
+            //获取当前窗口历史记录的个数 使用history对象
+            let length = window.history.length;
+            window.alert(length);
+        }
+
+        let btn_forward = window.document.getElementById("btn_forward");
+        btn_forward.onclick = function () {
+            window.history.forward();
+        }
+        let btn_backward = window.document.getElementById("btn_backward");
+        btn_backward.onclick = function () {
+            window.history.back();
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>

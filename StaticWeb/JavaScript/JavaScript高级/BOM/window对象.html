@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>window对象</title>
+</head>
+<body>
+
+
+    <script>
+      /*  /!*一次性定时方法*!/
+        setTimeout("alert('boom');",3000);
+        //或者
+        setTimeout("fun();",2000);
+        function fun() {
+            alert('boom fun')
+        }*/
+
+        //循环定时器
+      let id = setInterval("alert('boom');",1000); //返回值用于取消操作
+
+      //取消定时器
+        clearInterval(id);
+    </script>
+
+
+
+
+    <!--<input id="openBtn" type="button" value="新窗口">
+    <input id="closeBtn" type="button" value="关闭已经打开的那个窗口">
+
+    <script>
+        /*window.alert("hello"); //等同于alert, 一般用于弹出警告窗口。
+        let flag = confirm("是否确定退出？");//消息以及确认取消按钮的对话框。点击确定 ，返回true；点击取消返回false。（防止误操作）
+       /!* if (flag){
+            alert("点击确定了");
+        }else {
+            alert("点击取消了");
+        }*!/
+
+        //输入框,获取用户输入的值
+        let s = prompt("请输入一些东西");
+        alert(s);*/
+
+    </script>
+
+    &lt;!&ndash;需要使用谷歌浏览器测试&ndash;&gt;
+    <script>
+        var openBtn = document.getElementById("openBtn");
+        let newWindow;
+        openBtn.onclick = function () {
+            //打开新窗口
+             newWindow = open("https://www.baidu.com");
+        }
+        var closeBtn = document.getElementById("closeBtn");
+        closeBtn.onclick = function () {
+            //关闭新窗口(默认window.close关闭当前窗口，close方法是谁调用关闭谁)
+            // 为什么Edge浏览器会显示newWindow 为 null ?
+            newWindow.close();
+        }
+    </script>-->
+
+
+
+</body>
+</html>

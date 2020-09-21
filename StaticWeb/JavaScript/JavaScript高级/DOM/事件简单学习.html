@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件简单学习</title>
+</head>
+<body>
+    <!--方式一-->
+    <img  id="light" src="img/off.gif" onclick="fun()">
+    <!--方式二-->
+    <img  id="light2" src="img/off.gif">
+
+
+    <script>
+        function fun(){
+            alert("被点击");
+        }
+        function fun2(){
+            alert("fun2点击")
+        }
+
+        /*方式二*/
+        //获取对象
+        let light2 = document.getElementById(`light2`);
+        //绑定事件
+        light2.onclick = fun2;
+
+    </script>
+</body>
+</html>

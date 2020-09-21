@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Element元素对象</title>
+</head>
+<body>
+    <a>点击我</a>
+    <input type="button" id="btn_set" value="设置a标签属性">
+    <input type="button" id="btn_remove" value="删除a标签属性">
+    <script>
+        //获取a标签
+        let element_a = document.getElementsByTagName("a")[0];
+
+
+        let button = window.document.getElementById(`btn_set`);
+        button.onclick = function () {
+            element_a.setAttribute("href","https://www.baidu.com");
+        }
+
+        let btn_remove = window.document.getElementById(`btn_remove`);
+        btn_remove.onclick = function () {
+            /*element_a = document.getElementsByTagName("a")[0];*/
+            element_a.removeAttribute("href");
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM获取元素对象</title>
+
+    <!--<script>
+        /*通过id获取元素对象*/
+        var light = document.getElementById("light");
+        /*document.write(typeof light);*/
+        alert(light); //此处无法弹出，受script位置影响
+    </script>-->
+
+</head>
+<body>
+
+    <img id="light" src="img/off.gif">
+    <h1 id="title">jack ma</h1>
+
+    <script>
+        /*需要再Edge中打开，并且第一次打开并不是想要的效果，需要刷新*/
+        let elementById = document.getElementById('light');
+        let elementById1 = document.getElementById('title');
+
+        alert("wait...");
+        document.getElementById("light").src = "img/on.gif";
+       /* alert("wait...");
+        document.getElementById("light").src = "img/off.gif";*/
+
+
+       /* elementById1.innerText ="hello";*/
+    </script>
+
+
+
+</body>
+
+</html>

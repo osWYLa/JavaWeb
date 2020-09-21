@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Location对象</title>
+</head>
+<body>
+    <input id="btn" type="button" value="刷新">
+    <input id="baiduBtn" type="button" value="去百度">
+    <script>
+        //reload方法：
+        let btn = window.document.getElementById("btn");
+        btn.onclick = function () {
+            //刷新当前页面
+            window.location.reload();//为什么使用window.location.reload 没有reload方法提示？  location对象是如何获取的
+            window.location.reload();
+        }
+
+        //获取href
+        var href = location.href;
+        /*window.alert(href);*/
+
+        //点击按钮访问百度
+        let baiduBtn = window.document.getElementById("baiduBtn");
+        baiduBtn.onclick = function () {
+            location.href="https://www.baidu.com";
+        }
+    </script>
+</body>
+</html>

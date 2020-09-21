@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+</head>
+<body>
+    <img id="banner" src="img/banner_1.jpg" width="100%">
+    <input id="switch" type="button" value="停止轮播">
+    <input id="back_btn" type="button" value="后退">
+
+    <script>
+
+        let number = 1;
+
+        let banner = document.getElementById("banner");
+        //let on_off = document.getElementById("switch");
+        let timeID = setInterval(changeImg,1000);
+
+        function changeImg() {
+            number++;
+            if (number > 3) {
+                number = 1;
+            }
+            banner.src = "img/banner_"+number+".jpg";
+        }
+
+        let back_btn = window.document.getElementById("back_btn");
+        back_btn.onclick = function () {
+            window.history.back();
+        }
+
+       /* on_off.onclick = function () {
+            clearInterval(timeID);
+            alert("hello");
+            setTimeout("alert('等待3秒');",3000);
+            close();
+        }*/
+
+
+
+
+
+
+    </script>
+</body>
+</html>

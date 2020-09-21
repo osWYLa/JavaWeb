@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document文档对象</title>
+</head>
+<body>
+    <div id="div1">div1</div>
+    <div id="div2">div2</div>
+    <div id="div3">div3</div>
+
+    <div class="cls1">div4</div>
+    <div class="cls1">div5</div>
+
+    <input type="text" name="username">
+
+<script>
+    /*获取element对象的几种方法*/
+    let byId = document.getElementById(`div1`);
+
+    let divs = document.getElementsByTagName("div");
+    /*alert(divs.length);*/
+    let div_class = document.getElementsByClassName("cls1");
+   /* alert(div_class.length);*/
+    let ele_username = document.getElementsByName("username");
+   /* alert(ele_username.length);*/
+
+</script>
+
+</body>
+</html>
