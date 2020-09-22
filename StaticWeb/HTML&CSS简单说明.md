@@ -206,3 +206,36 @@ HTML 通过标签标记网页中的各个部分。网页文件本身是一种文
         > line-height 行高      
 
     2. 背景
+
+        > background
+
+    3. 边框
+
+        > border 设置边框，符合属性
+
+    4. 尺寸
+
+        > width 宽度
+        >
+        > height 高度
+
+    5. 盒子模型
+
+        > margin 外边距
+        >
+        > padding 内边距
+        >
+        > float 浮动
+        >
+        > ​			left
+        >
+        > ​			right
+
+        > 注意：
+        >
+        > 1. 相对概念
+        > 2. 默认情况下内边距会影响整个盒子的大小，需要使用box-size: border-box，设置盒子的属性，让width和height就是最终盒子的大小；
+
+        
+
+        
