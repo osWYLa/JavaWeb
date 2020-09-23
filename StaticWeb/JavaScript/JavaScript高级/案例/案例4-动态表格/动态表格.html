@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态表格</title>
+    <style>
+        table{
+            border: 1px solid;
+            margin: auto;
+            width: 500px;
+        }
+        td,th{
+            text-align: center;
+            border: 1px solid;
+        }
+        div{
+            text-align: center;
+            margin: 50px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div>
+        <input type="text" id="id" placeholder="请输入id号">
+        <input type="text" id="name" placeholder="请输入姓名">
+        <input type="text" id="gender" placeholder="请输入性别">
+        <input type="button" id="btn_add" value="添加" >
+    </div>
+    <table id="table">
+        <caption>学生信息表</caption>
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>操作</th>
+        </tr>
+        <tr >
+            <td>1</td>
+            <td>A</td>
+            <td>男</td>
+            <td><a  href="javascript:void(0);" onclick="delTr(this);">删除</a></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>B</td>
+            <td>男</td>
+            <td><a  href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+        </tr>
+        <tr>
+        <td>3</td>
+        <td>C</td>
+        <td>男</td>
+        <td><a  href="javascript:void(0);" onclick="delTr(this)">删除</a></td>
+    </tr>
+    </table>
+
+    <script>
+        let btn_add = window.document.getElementById("btn_add");
+        btn_add.onclick = function () {
+
+            let id = window.document.getElementById("id").value;
+            let name = window.document.getElementById("name").value;
+            let gender = window.document.getElementById("gender").value;
+
+            let table = window.document.getElementById("table");
+
+            let tr = window.document.createElement("tr");
+
+            let td_id = window.document.createElement("td");
+            let text_id = window.document.createTextNode(id);
+            td_id.appendChild(text_id);
+            tr.appendChild(td_id);
+
+            let td_name = window.document.createElement("td");
+            let text_name = window.document.createTextNode(name);
+            td_name.appendChild(text_name);
+            tr.appendChild(td_name);
+
+            let td_gender = window.document.createElement("td");
+            let text_gender = window.document.createTextNode(gender);
+            td_gender.appendChild(text_gender);
+            tr.appendChild(td_gender);
+
+            let td_option = window.document.createElement("td");
+
+            let a = window.document.createElement("a");
+            a.setAttribute("href","javascript:void(0);");
+            a.setAttribute("onclick","delTr(this)");
+            let text_a = window.document.createTextNode("删除");
+            a.appendChild(text_a);
+            td_option.appendChild(a);
+            tr.appendChild(td_option);
+
+            table.appendChild(tr);
+
+        }
+        function delTr(obj) {
+            let table = obj.parentNode.parentNode.parentNode;
+            let tr = obj.parentNode.parentNode;
+            table.removeChild(tr);
+        }
+
+    </script>
+</body>
+</html>
