@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMLDOM</title>
+</head>
+<body>
+    <div id="div1">div</div>
+    <script>
+        let div = document.getElementById(`div1`);
+        let innerHTML = div.innerHTML;
+        //div 标签中替换成一个文本输入框
+            // div.innerHTML = "<input type='text'>";
+        //div 标签追加一个文本输入框
+        div.innerHTML +="<input type='text'>";
+
+    </script>
+</body>
+</html>
