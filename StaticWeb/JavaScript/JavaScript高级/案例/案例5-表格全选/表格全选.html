@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格全选等功能</title>
+    <style>
+        table{
+            border: 1px solid;
+            width: 500px;
+            margin-left: 30%;
+        }
+        td,th{
+            text-align: center;
+            border: 1px solid;
+        }
+        div{
+            margin-top: 10px;
+            margin-left: 30%;
+        }
+        .over{
+            background: pink;
+        }
+        .out{
+            background: white;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <caption>学生信息管理</caption>
+        <tr>
+            <th><input type="checkbox" name="cb" id="firstCb"></th>
+            <th>姓名</th>
+            <th>id</th>
+            <th>性别</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <td><input type="checkbox"  name="cb" ></td>
+            <td>1</td>
+            <td>A</td>
+            <td>男</td>
+            <td><a href="javascript:void(0);">删除</a></td>
+        </tr>
+
+        <tr>
+            <td><input type="checkbox"  name="cb" ></td>
+            <td>2</td>
+            <td>B</td>
+            <td>男</td>
+            <td><a href="javascript:void(0);">删除</a></td>
+        </tr>
+
+        <tr>
+            <td><input type="checkbox"  name="cb" ></td>
+            <td>3</td>
+            <td>C</td>
+            <td>男</td>
+            <td><a href="javascript:void(0);">删除</a></td>
+        </tr>
+
+
+    </table>
+    <div>
+        <input type="button" id="selectAll" value="全选">
+        <input type="button" id="unselectAll" value="全不选">
+        <input type="button" id="selectRev" value="反选">
+    </div>
+
+    <script>
+        window.onload = function () {
+            let cbs = document.getElementsByName('cb');
+            document.getElementById("selectAll").onclick = function () {
+
+                for (let i = 0; i<cbs.length; i++){
+                    cbs[i].checked = true;
+                }
+
+            }
+            document.getElementById("unselectAll").onclick = function () {
+
+                for (let i = 0; i<cbs.length; i++){
+                    cbs[i].checked = false;
+                }
+            }
+            document.getElementById("selectRev").onclick = function () {
+
+                for (let i = 0; i<cbs.length; i++){
+                    cbs[i].checked =  !cbs[i].checked;
+                }
+            }
+            document.getElementById('firstCb').onclick = function () {
+
+                for (let i = 0; i<cbs.length; i++){
+                    cbs[i].checked =  this.checked;
+                }
+            }
+
+
+            let trs = document.getElementsByTagName("tr");
+            //这里监听事件的生命周期什么时候结束？
+            for (let i =0;i<trs.length;i++){
+                trs[i].onmouseover = function () {
+                    this.className = "over";
+                }
+                trs[i].onmouseout = function () {
+                    this.className = "out";
+                }
+            }
+
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>
