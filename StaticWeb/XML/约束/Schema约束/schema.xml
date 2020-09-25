@@ -1,0 +1,34 @@
+<?xml version ="1.0" encoding = 'utf-8' ?>
+
+<!--
+	1.填写xml文档的根元素
+	2.引入xsi前缀.  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	3.引入xsd文件命名空间.  xsi:schemaLocation="http://www.itcast.cn/xml  student.xsd"
+	4.为每一个xsd约束声明一个前缀,作为标识  xmlns="http://www.itcast.cn/xml"
+ -->
+
+
+<!--引入schema-->
+<!--
+可以同时引入多个约束文档，通过设置不同前缀区分
+默认就是空前缀
+-->
+<students xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="www.baidu.com student.xsd
+                              www.baidu2.com student2.xsd"
+          xmlns="www.baidu.com"><!--这里可以设置前缀a  xmlns：a="www.baidu.com"
+                                                    xmlns：b="www.baidu2.com"
+                                通过这种方式区分
+                                -->
+    <student number="heima_0001">
+        <name>yuye</name>
+        <age>23</age>
+        <sex>female</sex>
+    </student>
+    <student number="heima_0001">
+        <name>yuye</name>
+        <age>23</age>
+        <sex>female</sex>
+    </student>
+
+</students>
