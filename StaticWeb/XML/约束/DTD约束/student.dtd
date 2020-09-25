@@ -1,0 +1,6 @@
+<!ELEMENT students (student*) ><!--*为量词，表示student可以出现多次-->
+<!ELEMENT student (name,age,sex)><!--name,age,sex 每一项都只可以出现一次；且必须按照顺序出现-->
+<!ELEMENT name (#PCDATA)><!-- PCDATA 字符串 -->
+<!ELEMENT age (#PCDATA)><!-- PCDATA 字符串 -->
+<!ELEMENT sex (#PCDATA)><!-- PCDATA 字符串 -->
+<!ATTLIST student number ID #REQUIRED><!-- 为student标签声明一个属性，属性名叫number，属性的类型是ID，表示number的属性值必须唯一，且number的属性是required -->
