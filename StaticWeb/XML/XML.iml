@@ -4,17 +4,38 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/Resource" type="java-resource" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="Libs">
         <CLASSES>
-          <root url="file://$MODULE_DIR$/src/解析/libs" />
+          <root url="file://$MODULE_DIR$/src/ParsingXML/libs" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
-        <jarDirectory url="file://$MODULE_DIR$/src/解析/libs" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/src/ParsingXML/libs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="libs">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/src/ParsingXML/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/src/ParsingXML/libs" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Libs (2)">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/src/ParsingXML/libs" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/src/ParsingXML/libs" recursive="false" />
       </library>
     </orderEntry>
   </component>
