@@ -75,7 +75,7 @@ HTML 通过标签标记网页中的各个部分。网页文件本身是一种文
 ```$xslt
 如：
 
-<div style="color:red;">hello css</div>
+<div style="color:red;">ParsingXML css</div>
 ```
 
 2. 内部样式
@@ -90,7 +90,7 @@ HTML 通过标签标记网页中的各个部分。网页文件本身是一种文
     </style>
 </head>
 
-<div>hello css2</div>
+<div>ParsingXML css2</div>
 ```
 
 3. 外部样式
@@ -115,8 +115,8 @@ HTML 通过标签标记网页中的各个部分。网页文件本身是一种文
        </style> 
     </head>
 
-    <div>hello css3</div>
-    <div>hello css3</div>
+    <div>ParsingXML css3</div>
+    <div>ParsingXML css3</div>
 
 ```
 

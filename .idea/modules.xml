@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/StaticWeb/JavaScript/JavaScript.iml" filepath="$PROJECT_DIR$/StaticWeb/JavaScript/JavaScript.iml" />
       <module fileurl="file://$PROJECT_DIR$/JavaWeb.iml" filepath="$PROJECT_DIR$/JavaWeb.iml" />
       <module fileurl="file://$PROJECT_DIR$/StaticWeb/StaticWeb.iml" filepath="$PROJECT_DIR$/StaticWeb/StaticWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Web/Web.iml" filepath="$PROJECT_DIR$/Web/Web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StaticWeb/XML/XML.iml" filepath="$PROJECT_DIR$/StaticWeb/XML/XML.iml" />
     </modules>
   </component>
 </project>
