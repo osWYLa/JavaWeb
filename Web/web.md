@@ -7,7 +7,7 @@
    - B/S
    
 2. 资源分类
-   
+  
    ![资源分类](web.assets/资源分类.bmp)
    
    - 静态资源
@@ -317,3 +317,85 @@
        1. 定义类继承HttpServlet
        2. 复写doGet/doPost方法
 
+## HTTP
+
+- 概念：Hyper Text Transfer Protocol 超文本传输协议
+
+  - 传输协议：定义客户端-服务器通信的数据格式
+  - 特点
+    - 基于TCP/IP协议
+    - 默认端口号80
+    - 基于请求/响应模型：一次请求对应一次响应
+    - 无状态：每次请求之前相互独立，不能交互数据
+  - 历史版本
+    - 1.0 ：每次请求响应都会建立新的连接
+    - 1.1：复用连接
+
+- 请求消息数据格式
+
+  1. 请求行（请求方式   请求URL  请求协议/版本）
+
+     ​						GET            login.html           HTTP/1.1
+
+     - 请求方式（HTTP协议有7种请求方式，最常见的是GET和POST）
+
+       - GET
+         - 请求参数在请求行中，在URL后；
+         - 请求的URL长度有限制
+         - 相较不太安全
+       - POST
+         - 请求参数在请求体中
+         - 请求的URL长度没有限制
+         - 相较安全
+     
+  2. 请求头（客户端的浏览器告诉服务器一些信息）
+
+       - 格式：请求头名称 ： 请求头值
+
+       - 常见的请求头
+
+         1. User-Agent ：客户端浏览器告诉服务器，所使用的浏览器版本信息；
+
+            > 作用：可在服务器端获取到该头信息，用于解决浏览器的兼容性问题；
+
+         2. Referer：http://localhost/login.html
+
+            Referer头用于告诉服务器，当前请求从何处来
+
+            > 作用：1.防盗链 ；2.做站点统计
+
+  3. 请求空行
+
+    用于分割POST请求的请求头和请求体
+
+  4. 请求体（正文）
+
+    请求体用于封装POST请求消息的请求参数
+
+- 请求消息数据字符串格式
+
+  ```html
+  //POST方式（POST请求，请求参数在请求体中）
+  //请求行
+  POST /AnnotaionServlet/hehe.html HTTP/1.1
+  //请求头
+  Host: localhost:8080
+  User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0
+  Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+  Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+  Accept-Encoding: gzip, deflate
+  Content-Type: application/x-www-form-urlencoded
+  Content-Length: 18
+  Origin: http://localhost:8080
+  Connection: keep-alive
+  Referer: http://localhost:8080/AnnotaionServlet/login.html
+  Upgrade-Insecure-Requests: 1
+  //请求空行
+  
+  //请求体（正文）(未解析时是等号，浏览器解析之后以分号显示)
+  username = zhangsan
+  
+  
+  ```
+
+  
