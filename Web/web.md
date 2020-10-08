@@ -394,8 +394,210 @@
   
   //请求体（正文）(未解析时是等号，浏览器解析之后以分号显示)
   username = zhangsan
-  
-  
   ```
-
   
+
+## Request
+
+### 1. Request&Response对象
+
+- request和response对象由服务器创建；
+- request对象用于获取请求消息，response对象用于设置响应消息；
+
+### 2. request对象继承体系结构
+
+> ServletRequest		--	接口
+> 		|	继承
+> HttpServletRequest	-- 接口
+> 		|	实现
+> org.apache.catalina.connector.RequestFacade 类(tomcat)
+
+### 3. request功能
+
+#### 1. 获取请求消息数据
+
+1. 获取请求行数据
+
+   - 请求行数据示例：GET /虚拟目录/demo1?name=zhangsan HTTP/1.1
+
+   - 方法
+
+     > - 获取请求方式：GET
+     >
+     >   `String getMethod()`
+     >
+     > - **获取虚拟目录：/虚拟目录**
+     >
+     >   `String getCOntextPath()`
+     >
+     > - 获取Servlet路径: /demo1
+     >
+     >   `String getServletPath()`
+     >
+     > - 获取get方式请求参数:name=zhangsan
+     >
+     >   `String getQueryString()`
+     >
+     > - **获取请求URI：/虚拟目录/demo1**
+     >
+     >   `String getRequestURI():		/day14/demo1`
+     >
+     >   `StringBuffer getRequestURL()  :http://localhost/虚拟目录/demo1`
+     >
+     >   注意：
+     >
+     >   1. URL:统一资源定位符 ： http://localhost/虚拟目录/demo1
+     >   2. URI：统一资源标识符 : /虚拟目录/demo1
+     >
+     > - 获取协议及版本:HTTP/1.1
+     >
+     >   `String getProtocol()`
+     >
+     > - 获取客户机IP
+     >
+     >   `String getRemoteAddr()`
+
+2. 获取请求头数据
+
+   > 方法：
+   >
+   > - **String getHeader(String name):通过请求头的名称获取请求头的值**
+   > - Enumeration<String> getHeaderNames():获取所有的请求头名称
+
+3. 获取请求体数据
+
+   - 请求体：只有POST请求方式才有请求体，在请求体中封装了POST请求的请求参数；
+
+   - 步骤：
+
+     1. 获取流对象
+
+        > 方法
+        >
+        > - BufferedReader getReader()：获取字符输入流，只能操作字符数据
+        > - ServletInputStream getInputStream()：获取字节输入流，可以操作所有类型数据（文件上传中详细说明）
+
+     2. 从流对象中取数据
+
+#### 2. 其他功能
+
+1. 获取请求参数通用方式：GET/POST方式都可以通过下列方法获取请求参数
+
+   > 方法
+   >
+   > - String getParameter(String name):根据参数名称获取参数值    username=zs&password=123
+   > - String[] getParameterValues(String name):根据参数名称获取参数值的数组  hobby=xx&hobby=game（复选框数据处理可使用）
+   > - Enumeration<String> getParameterNames():获取所有请求的参数名称
+   > - Map<String,String[]> getParameterMap():获取所有参数的map集合
+   >
+   > 注意：关于中文乱码问题
+   >
+   > get方式：tomcat 8 已经将get方式的中文乱码问题解决；
+   >
+   > post方式：会乱码
+   >
+   > ​						处理方式：在获取参数前设置request的编码：
+   >
+   > ​                    `request.setCharacterEncoding("utf-8")`		
+
+2. 请求转发：一种**服务器内部**的资源跳转
+
+   >步骤：
+   >
+   >1. 通过request对象获取请求转发器对象
+   >
+   >   `RequestDispatcher getRequestDispatcher(String path)`
+   >
+   >2. 使用RequestDispatcher对象来进行转发
+   >
+   >   `forward(ServletRequest request, ServletResponse response) `
+   >
+   >**请求转发特点：**
+   >
+   >1. 浏览器地址栏路径不会发生变化
+   >2. 只能转发到当前服务器内部资源
+   >3. 转发是在一次请求中
+
+3. 共享数据
+
+   - 域对象：一个有作用范围的对象，可以在范围内共享数据；
+
+   - request域：代表一次请求的范围，一般用于在**请求转发的多个资源中**共享数据
+
+     > 方法：
+     >
+     > - void setAttribute(String name,Object obj) ：存储数据
+     > - Object getAttitude(String name)：通过键获取值
+     > - void removeAttribute(String name)：通过键移除键值对
+
+4. 获取ServletContext
+
+   `ServletContext getServletContext()`
+
+### 4. 登录案例
+
+> 用户登录案例需求：
+>
+> 1. 编写login.html登录页面 username & password 两个输入框
+> 2. 使用Druid数据库连接池技术,操作mysql，day14数据库中user表
+> 3. 使用JdbcTemplate技术封装JDBC
+> 4. 登录成功跳转到SuccessServlet展示：登录成功！用户名,欢迎您
+> 5. 登录失败跳转到FailServlet展示：登录失败，用户名或密码错误
+
+```java
+//步骤
+//1.创建项目，导入html页面，JDBC配置文件，依赖jar包
+//2.创建数据库环境
+    CREATE	DATABASE USERS;
+    USE USERS;
+    CREATE TABLE USER(
+        id 	INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(32) UNIQUE NOT NULL,
+        PASSWORD VARCHAR(32) NOT NULL
+    );
+//3.创建包domain.User(domain package下创建User)
+	- 创建用户实体类，提供set、get方法，重写toString方法
+//4.创建包util.JDBCUtils（util package下创建工具类JDBCUtils） 
+    - JDBC工具类，使用Durid连接池
+    - 加载JDBC配置文件
+    - 获取连接池对象
+    - 获取连接对象
+//5.创建包dao.UserDao(dao package 下创建UserDao，并提供login方法)
+    - 声明JdbcTemplate对象，共用
+    - login方法体中，编写sql，调用query方法获取查询结果（user对象，可能为null）
+//6.创建包web.servlet.LoginServlet(创建web package，其下创建servlet package,在其中创建LoginServlet)
+    - 设置编码
+    - 获取请求参数
+    - 封装user对象
+    - 调用UserDao的login方法
+    - 通过user值是否为空，判断查询结果。若成功，存储域数据，转发至successServlet；若失败，转发至failServlet
+//7.在servlet package 下创建FailServlet和SuccessServlet类
+    SuccessServlet：
+    - 获取request域中共享的user对象
+    - 输出（设置编码，输出）
+    FailServlet：
+    - 设置编码
+    - 输出
+//8.login.html中form表单的action路径的写法
+    虚拟目录+Servlet的资源路径
+//9.BeanUtils工具类的使用：简化数据封装
+    用于封装JavaBean的
+    - JavaBean：标准的Java类
+        1. 要求：
+        	1. 类必须被public修饰
+            2. 必须提供空参的构造器
+            3. 成员变量必须使用private修饰
+            4. 提供公共setter和getter方法
+        2. 功能：封装数据
+    - 概念：
+        成员变量 VS 属性
+        属性：setter和getter方法截取后的产物。
+        如： getUsername() --> Username--> username
+    - 方法：
+        1. setProperty()
+        2. getProperty()
+        3. populate(Object obj , Map map):将map集合的键值对信息，封装到对应的JavaBean对象中
+
+
+```
+
