@@ -11,7 +11,7 @@
    ![资源分类](web.assets/资源分类.bmp)
    
    - 静态资源
-   - 动态资源（动态资源先转化成静态资源再返回给浏览器）
+   - 动态资源（动态资源先转化成静态资源再返回给浏览器）：servlet、jsp
    
 3. 网络通信三要素
    - IP
@@ -146,6 +146,8 @@
 >    - run-->Confriguations-->server-->"Update resources"
 >
 >      ​											-->Deployment-->Application context:/ 设置虚拟目录
+>      
+>    - 通过设置run-->Confriguations-->server-->"Update classes and resources" ,再通过debug方式启动可以避免总是重启tomcat。需要注意的是，更改设置之后需要重新启动一次tomcat才会生效。同时，如果新建了Java类，比如servlet，也要重新启动，因为，只是针对与修改，会自动的更新，新建并不会自动更新。
 >    
 > 3. IDEA会为每一个tomcat部署的项目单独建立一份配置文件，具体配置文件的位置可以通过查看控制台中log获取:
 >
@@ -317,6 +319,59 @@
        1. 定义类继承HttpServlet
        2. 复写doGet/doPost方法
 
+### ServletContext对象
+
+- 概念：ServletContext对象代表整个web应用，可以和web应用程序的容器（tomcat服务器）通信
+
+- ServletContext对象获取(所获取的对象相同)
+
+  ```java
+  //1.通过request对象获取
+  request.getServletContext();
+  //2.通过HttpServlet获取
+  this.getServeltContext();
+  ```
+
+- ServletContext对象功能
+
+  1. 获取MIME类型
+
+     - MIME类型:在互联网通信过程中定义的一种文件数据类型（Http亦遵从）
+
+     - 格式：大类型/小类型       如： text/html image/jpeg
+
+     - 获取：String getMimeType(String file) 
+
+       通过扩展名（后缀名）获取。这个方法之所以可以获取到，是因为MIME关系存储在服务器中（<mime-mapping></mime-mapping>），而ServletContext对象可以和web应用程序的容器（tomcat服务器）通信，故可以获取。
+
+  2. 域对象：共享数据
+
+     - **ServletContext对象范围：所有用户所有请求的数据。**
+
+        一般不轻易使用。
+
+     ```java
+     1. setAttribute(String name,Object value)
+     2. getAttribute(String name)
+     3. removeAttribute(String name)
+     ```
+
+  3. 获取文件的真实路径（服务器路径、文件部署运行的路径）
+
+     > 方法：
+     >
+     > ```java
+     > //以读取配置文件为例（配置文件一般有三个存放位置：src下、web下、web-->WEB-INF下）
+     > //1.获取web目录下的b.txt
+     > 	String b = servletContext.getRealPath("/b.txt");
+     > 	/* File file = new File(b);//获取到file对象就可以使用输入输出流操作了*/
+     > //2.获取web-->WEB-INF目录下的c.txt
+     >     String c = servletContext.getRealPath("/WEB-INF/c.txt");
+     > //3.获取src下的a.txt 。最后发布时，src中的内容会被发布到 WEB-INF的classes目录下
+     >     //注意：src目录下的资源访问路径，还可以通过ClassLoader获取，但是ClassLoader只能获取src目录下的资源，并不能获取web目录下的资源。局限较大
+     >     String a = servletContext.getRealPath("/WEB-INF/classes/a.txt");
+     > ```
+
 ## HTTP
 
 - 概念：Hyper Text Transfer Protocol 超文本传输协议
@@ -396,15 +451,51 @@
   username = zhangsan
   ```
   
+- 响应消息数据格式
 
-## Request
+  1. 响应行（协议/版本   响应状态码  状态码描述）
+     - 响应状态码：服务器告诉客户端浏览器当次请求和响应的状态（3位数字）
+       - 响应状态码分类
+         1. 1XX :服务器就收客户端消息，但没有接受完成，等待一段时间后，发送1xx多状态码
+         2. 2XX :成功。代表状态码：200
+         3. 3XX：重定向。代表状态码：302（重定向），304（访问缓存）
+         4. 4XX：客户端错误。代表错误码：404（请求路径没有对应的资源），405（请求方式没有对应的doXXX方法）
+         5. 5XX：服务器错误。代表错误码：500（服务器内部出现异常）
+  2. 响应头（响应头名称：值）
+     - 常见响应头：
+       1. Content-Type：服务器告诉客户端本次响应体数据格式以及编码格式
+       2.  Content-disposition：服务器告诉客户端以什么格式打开响应体数据（in-line:默认值，在当前页面内打开；attachment;filename=xxx:以附件形式打开响应体。文件下载时会使用）
+  3. 响应空行
+  4. 响应体
 
-### 1. Request&Response对象
+- 响应消息数据字符串格式
+
+  ```html
+  HTTP/1.1 200 
+  Content-Type: text/html;charset=UTF-8
+  Content-Length: 108
+  Date: Sat, 10 Oct 2020 12:33:58 GMT
+  Keep-Alive: timeout=20
+  Connection: keep-alive
+  
+  <html>
+    <head>
+      <title>response测试</title>
+    </head>
+    <body>
+    hello ,测试！
+    </body>
+  </html>
+  ```
+
+### Request
+
+#### 1. Request&Response对象
 
 - request和response对象由服务器创建；
 - request对象用于获取请求消息，response对象用于设置响应消息；
 
-### 2. request对象继承体系结构
+#### 2. request对象继承体系结构
 
 > ServletRequest		--	接口
 > 		|	继承
@@ -412,9 +503,9 @@
 > 		|	实现
 > org.apache.catalina.connector.RequestFacade 类(tomcat)
 
-### 3. request功能
+#### 3. request功能
 
-#### 1. 获取请求消息数据
+##### 1. 获取请求消息数据
 
 1. 获取请求行数据
 
@@ -428,7 +519,7 @@
      >
      > - **获取虚拟目录：/虚拟目录**
      >
-     >   `String getCOntextPath()`
+     >   `String getContextPath() //可以有效避免虚拟目录变动导致的访问地址变动问题`
      >
      > - 获取Servlet路径: /demo1
      >
@@ -479,7 +570,7 @@
 
      2. 从流对象中取数据
 
-#### 2. 其他功能
+##### 2. 其他功能
 
 1. 获取请求参数通用方式：GET/POST方式都可以通过下列方法获取请求参数
 
@@ -534,7 +625,7 @@
 
    `ServletContext getServletContext()`
 
-### 4. 登录案例
+#### 登录案例(requset)
 
 > 用户登录案例需求：
 >
@@ -597,7 +688,132 @@
         1. setProperty()
         2. getProperty()
         3. populate(Object obj , Map map):将map集合的键值对信息，封装到对应的JavaBean对象中
-
-
 ```
+
+### Response
+
+#### response功能
+
+##### 1. 设置响应行
+
+- 格式：HTTP/1.1 200 ok
+- 设置状态码：setStatus(int sc)
+
+##### 2. 设置响应头
+
+- setHeader(String name,String value)
+
+##### 3. 设置响应体
+
+> 步骤：
+>
+> 1. 获取输出流
+>    - 字符输出流：PrintWriter getWriter()
+>    - 字节输出流：ServletOutputStream getOutputStream()
+> 2. 使用输出流，将数据输出到客户端浏览器
+
+#### 案例
+
+> 1. 完成重定向（资源跳转）
+>
+>    ```java
+>    //1.设置状态码为302
+>    response.setStatus(302);
+>    //2.设置响应头location
+>    response.setHeader("location","/day15/responseDemo2");
+>    
+>    //简单的重定向方法（取代1、2两步）
+>    response.sendRedirect("/day15/responseDemo2");
+>    ```
+>
+> 2. 服务器输出字符数据到浏览器
+>
+>    步骤:
+>
+>    1. 获取字符输出流
+>    2. 输出数据
+>
+>    注意：乱码问题（编解码使用的字符集不一致）
+>
+>    ```java
+>    //PrintWriter 的print方法可以自动刷新，把数据写出缓冲区，这里的PrinterWriter由response对象获取。同理，即使调用write方法，也不需要自己刷新，因为都是由response对象获取的。这里写入普通文本没有问题，写入一些html标签也可以，浏览器可以识别
+>    PrintWriter pw = response.getWriter();    //获取的流的默认编码是ISO-8859-1
+> //浏览器解析字符集：与当前浏览器所处的操作系统语言环境有关，当前默认GBK（gb2312）
+>    //PrintWriter 是由response对象获取的。如果是自己new出来的，那么会和当前的编辑环境编码有关。但获取的流对象实际是tomcat返回的。而tomcat的默认编码是ISO-8859-1，即由response对象获取的流对象的默认编码为tomcat此时的编码格式。
+>    
+>    正确的写法：
+>        方式1. 获取流对象前，设置流的默认编码格式：ISO-8859-1 ---> GBK;但这种方式，不能完全解决。（这只是设置了服务器响应数据的格式，没有固定浏览器的解析格式。如果浏览器恰巧是GBK解码，则不会乱码，若浏览器并非使用GBK解码，依旧会出现乱码现象）
+>    		response.setCharacterEncoding("utf-8");
+>    	方式2. (设置ContentType响应头)告知浏览器，服务器发送的消息体数据的编码，同时建议浏览器使用该编码进行解码
+>            response.setHeader("content-type","text/html;charset=utf-8");
+>        方式3.（简单的方式设置ContentType响应头【推荐使用】）
+>            response.setContentType("text/html;charset=utf-8");
+>    
+>    ```
+>    
+> 3. 服务器输出字节数据到浏览器
+>
+>    步骤：
+>
+>     			1. 获取字节输出流
+>        			2. 输出数据
+>
+> 4. 验证码案例（验证码本质：图片；用于防止恶意的表单注册）
+
+> **重定向VS转发**
+>
+> 1. 重定向：redirect
+>    - 重定向地址栏路径变化
+>    - 重定向可以访问其他站点（其他服务器）的资源
+>    - 重定向是两次请求。不能使用requset对象来共享数据
+> 2. 转发：forward
+>    - 转发地址栏路径变化
+>    - 转发不可以访问其他站点的资源，只能访问当前服务器下的资源
+>    - 转发只是一次请求，可以使用request对象来共享数据
+
+> **路径**
+>
+> 1. 路径分类
+>
+>    - 相对路径
+>    - 绝对路径
+>
+> 2. 路径写法（通过判断此路径需要给谁使用）
+>
+>    - 给客户端浏览器使用：需要添加虚拟目录（项目的访问路径）。
+>
+>      如:<a> , <form> 重定向...;同时，建议动态获取当前的虚拟目录：request.getContextPath()
+>
+>    - 给服务器使用：不需要添加虚拟目录
+>
+>      如：转发路径
+
+> **文本下载案例（response+ServletContext）**
+>
+> * 步骤：
+>
+>   1. 定义页面，编辑超链接href属性，指向Servlet，传递资源名称filename
+>
+>   2. 定义Servlet
+>
+>   3. 获取文件名称
+>
+>   4. 使用字节输入流加载文件进内存
+>
+>   5. 指定response的响应头： content-disposition:attachment;filename=xxx
+>
+>   6. 将数据写出到response输出流
+>
+> * 中文文件名问题：
+>
+>   1. 获取客户端使用的浏览器版本信息
+>   2. 根据不同的版本信息，设置filename的编码方式不同（使用工具类）
+
+## 会话技术
+
+### 1. Cookie
+
+### 2. Session
+
+## JSP
 
