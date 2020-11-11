@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS原生方式</title>
+    <script>
+        function fun() {
+            var xmlhttp;
+            if (window.XMLHttpRequest){
+                xmlhttp = new XMLHttpRequest();
+            }
+            else
+            {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlhttp.open("GET","ajaxServlet?username=tom",true); //谷歌浏览器无法测试，火狐可以
+
+            xmlhttp.send();
+
+            //接受相应结果
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status ==200){
+                    let responseText = xmlhttp.responseText;
+                    alert(responseText);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+  <input type="button" value="发送异步请求" onclick="fun();">
+  <input>
+</body>
+</html>

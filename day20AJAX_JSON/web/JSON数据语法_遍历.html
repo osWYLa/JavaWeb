@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON数据语法</title>
+    <script>
+        //1.基本数据格式（键在写的时候允许有以下三种形式，但最好同一使用一种便于阅读）
+        let json_person = {"name": "张三", age: 23, 'gender': true};
+        //获取键对应的值
+        //方法一：
+        //let name = json_person.name;
+        //alert(name);
+        //方法二：(常用于遍历)
+        let name = json_person["name"];
+        //alert(name);
+        //2.嵌套格式 {}———> []
+        let persons = {
+            "persons": [
+                {"name": "张三", "age": 23, "gender": true},
+                {"name": "李四", "age": 24, "gender": true},
+                {"name": "王五", "age": 25, "gender": false}
+            ]
+        };
+        //取出王五的姓名
+        let name1 = persons.persons[2].name;
+        //alert(name1);
+
+        //2.嵌套格式   []———> {}
+        let ps = [{"name": "张三", "age": 23, "gender": true},
+            {"name": "李四", "age": 24, "gender": true},
+            {"name": "王五", "age": 25, "gender": false}];
+        //获取李四值
+       // alert(ps[1].name);
+
+
+
+        //遍历 for in 遍历
+        for ( let key in json_person){
+            //alert(key+":"+json_person.key)  这是典型的错误写法，此时的key是"key"形式，这样写就相当于写json_person."key" ,明显的错误。需要使用第二种方式遍历
+            alert(json_person[key]);
+        }
+
+        //遍历所有
+        for (let i = 0;i < ps.length; i++){
+            let p  = ps[i];
+            for (let key in p){
+                alert(key+":"+p[key]);
+            }
+        }
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            //给username框绑定离焦事件
+            $("#username").blur(function () {
+                let username = $(this).val();
+                //发送AJAX请求
+                $.get("findUserServlet",{username:username},function (data) {
+                    //自己在servlet中设置一个标志位userExist，判断userExist键的值是否为true
+                    let span = $("#s_username");
+                    if (data.userExsit){
+                        //用户名存在
+                        span.css("color","red");
+                        span.html(data.msg);
+                    }else {
+                        //用户名不存在
+                        span.css("color","green");
+                        span.html(data.msg);
+                    }
+
+                }/*,"json"*/); //在前端可以指定为json格式，也可以在后端直接指定，同时设置中文编码格式，防止乱码
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" id="username" name="username" placeholder="请输入用户名" >
+        <span id="s_username"></span>
+        <br>
+        <input type="password" name="password" placeholder="请输入密码"><br>
+        <input type="submit" value="注册">
+    </form>
+</body>
+</html>
