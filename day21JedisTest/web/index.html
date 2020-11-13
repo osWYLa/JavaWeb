@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查询身份</title>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function () {
+            $.get("findProvinceServlet",{},function (data) {
+                //[{"id":1,"name":"北京"},{"id":2,"name":"上海"},{"id":3,"name":"南京"},{"id":4,"name":"芜湖"}]
+
+                //1.获取select标签
+                let province = $("#province");
+                //2.遍历json数组
+                $(data).each(function () {//这里的function每遍历一次，执行一次
+                    //3.创建option
+                    let option  = "<option name='"+this.id+"'>"+this.name+"</option>";
+                    //4. 调用select的append
+                    province.append(option);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <select id="province">
+        <option>--请选择省份--</option>
+    </select>
+</body>
+</html>
